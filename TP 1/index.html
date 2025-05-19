@@ -18,6 +18,12 @@
         <label for="auteur">Auteur</label>
         <input type="text" name="auteur" id="auteur">
 
+        <label for="bookType">Type de livre</label>
+        <select name="bookType" id="bookType">
+            <option value="Papier">Papier</option>
+            <option value="Numérique">Numérique</option>
+        </select>
+
         <button type="submit" id="ajouter">Ajouter</button>
     </form>
 
@@ -35,6 +41,7 @@
                 <th>Titre</th>
                 <th>Auteur</th>
                 <th>Année</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody id="datas"></tbody>

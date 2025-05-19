@@ -1,4 +1,4 @@
-import ManageDom from "./ManageDom.js";
+import ManageDom from "../assets/ManageDom.js";
 
 export default class Library extends ManageDom {
     constructor() {
@@ -9,6 +9,7 @@ export default class Library extends ManageDom {
 
     start() {
         this.addEvent();
+        this.displayBooks();
     }
 
     addEvent() {
@@ -33,11 +34,22 @@ export default class Library extends ManageDom {
         const titre = document.getElementById('titre');
         const annee = document.getElementById('annee');
         const auteur = document.getElementById('auteur');
+        const bookType = document.getElementById('bookType');
         this.books.push({
             titre: titre.value,
             annee: annee.value,
             auteur: auteur.value,
+            type: bookType.value,
         });
+
+        const string = JSON.stringify({
+            annee: annee.value,
+            auteur: auteur.value,
+            type: bookType.value,
+        });
+
+        localStorage.setItem(titre.value, string);
+
         this.displayBooks();
     }
 
@@ -46,21 +58,34 @@ export default class Library extends ManageDom {
         const searchInput = document.getElementById('findBook');
         const search = searchInput.value;
         const datas = document.getElementById('datas');
-        let count = 0;
+        const bookDatas = localStorage.getItem(search);
+        /* let count = 0; */
 
-        this.books.forEach(element => {
+        if (bookDatas === null) {
+            alert('Aucun livre trouvé');
+        } else {
+            const parsedBookDatas = JSON.parse(bookDatas);
+            const tr = this.createMarkup('tr', '', datas, [{id: 'infos'}]);
+            this.createMarkup('td', searchInput.value, tr);
+            this.createMarkup('td', parsedBookDatas.auteur, tr);
+            this.createMarkup('td', parsedBookDatas.annee, tr);
+            this.createMarkup('td', parsedBookDatas.type, tr);
+        }
+
+        /* this.books.forEach(element => {
             if (element.titre === search) {
                 count++;
                 const tr = this.createMarkup('tr', '', datas, [{id: 'infos'}]);
                 this.createMarkup('td', element.titre, tr);
                 this.createMarkup('td', element.auteur, tr);
                 this.createMarkup('td', element.annee, tr);
+                this.createMarkup('td', element.type, tr);
             }
-        });
+        }); */
 
-        if (count === 0) {
+        /* if (count === 0) {
             alert('Aucun livre trouvé');
-        }
+        } */
     }
 
     removeRows() {
@@ -76,12 +101,16 @@ export default class Library extends ManageDom {
         }
     }
 
-    displayBooks() {        
+    displayBooks() {
         this.detachBooks();
         const liste = document.getElementById('listeLivres');
-        this.books.forEach(element => {
+        for (let i = 0; i < localStorage.length; i++) {
+            const li = this.createMarkup('li', `${localStorage.key(i)}`, liste);
+        }
+        /* this.books.forEach(element => {
             const li = this.createMarkup('li', `${element.titre}`, liste);
-        });
+        }); */
+        
     }
 
     detachBooks() {
@@ -93,7 +122,18 @@ export default class Library extends ManageDom {
 
     deleteBook() {
         const deletedBook = document.getElementById('deletedBook');
-        if (this.books.length > 0) {
+
+        if (localStorage.length > 0) {
+            for (let i = 0; i < localStorage.length; i++) {
+                if (localStorage.key(i) === deletedBook.value) {
+                    localStorage.removeItem(localStorage.key(i));
+                }
+            }
+        } else {
+            alert('Ajoutez des livres pour pouvoir en supprimer');
+        }
+
+        /* if (this.books.length > 0) {
            for (let i = 0; i < this.books.length; i++) {
                 if (this.books[i].titre === deletedBook.value) {
                     this.books.splice(i, i+1);
@@ -103,7 +143,8 @@ export default class Library extends ManageDom {
             } 
         } else {
             alert('Ajoutez des livres pour pouvoir en supprimer');
-        }        
+        } */
         this.displayBooks();
+        this.removeRows();
     }
 }

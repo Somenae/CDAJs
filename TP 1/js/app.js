@@ -1,3 +1,3 @@
-import Library from "./scripts/Library.js";
+import Library from "./scripts/library/Library.js";
 
-new Library;
+new Library();
