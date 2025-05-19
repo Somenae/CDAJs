@@ -3,7 +3,7 @@ import ManageDom from "../assets/ManageDom.js";
 export default class Library extends ManageDom {
     constructor() {
         super();
-        this.books = [];
+        /* this.books = []; */
         this.start();
     }
 
@@ -35,12 +35,12 @@ export default class Library extends ManageDom {
         const annee = document.getElementById('annee');
         const auteur = document.getElementById('auteur');
         const bookType = document.getElementById('bookType');
-        this.books.push({
+        /* this.books.push({
             titre: titre.value,
             annee: annee.value,
             auteur: auteur.value,
             type: bookType.value,
-        });
+        }); */
 
         const string = JSON.stringify({
             annee: annee.value,
