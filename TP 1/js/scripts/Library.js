@@ -15,6 +15,9 @@ export default class Library extends ManageDom {
         const button = document.getElementById('ajouter');
         button.addEventListener('click', () => this.addBook());
 
+        const findButton = document.getElementById('rechercher');
+        findButton.addEventListener('click', () => this.findBook());
+
         const deleteButton = document.getElementById('supprimer');
         deleteButton.addEventListener('click', () => this.deleteBook());
 
@@ -38,11 +41,40 @@ export default class Library extends ManageDom {
         this.displayBooks();
     }
 
+    findBook() {
+        this.removeRows();
+        const searchInput = document.getElementById('findBook');
+        const search = searchInput.value;
+        const datas = document.getElementById('datas');
+
+        this.books.forEach(element => {
+            if (element.titre === search) {
+                const tr = this.createMarkup('tr', '', datas, [{id: 'infos'}]);
+                this.createMarkup('td', element.titre, tr);
+                this.createMarkup('td', element.auteur, tr);
+                this.createMarkup('td', element.annee, tr);
+            }
+        });
+    }
+
+    removeRows() {
+        const tr = document.getElementById('infos');
+        if (tr != null) {
+            while (tr.firstChild) {
+                tr.removeChild(tr.firstChild);
+            }
+        }
+        const datas = document.getElementById('datas');
+        while (datas.firstChild) {
+            datas.removeChild(datas.firstChild);
+        }
+    }
+
     displayBooks() {        
         this.detachBooks();
         const liste = document.getElementById('listeLivres');
         this.books.forEach(element => {
-            const li = this.createMarkup('li', `titre : ${element.titre}, Année : ${element.annee}, Auteur : ${element.auteur}`, liste);
+            const li = this.createMarkup('li', `${element.titre}`, liste);
         });
     }
 

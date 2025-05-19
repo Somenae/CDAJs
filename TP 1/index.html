@@ -21,13 +21,33 @@
         <button type="submit" id="ajouter">Ajouter</button>
     </form>
 
+    <h1>Rechercher un livre</h1>
+    <form action="">
+        <label for="findBook">Rechercher par titre</label>
+        <input type="text" name="findBook" id="findBook">
+    
+        <button type="submit" id="rechercher">Rechercher</button>
+    </form>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Année</th>
+            </tr>
+        </thead>
+        <tbody id="datas"></tbody>
+    </table>
+        
     <h1>Suppression de livres</h1>
     <form action="">
-        <label for="deletedBook">Rechercher par titre</label>
+        <label for="deletedBook">Supprimer par titre</label>
         <input type="text" name="deletedBook" id="deletedBook">
 
         <button type="submit" id="supprimer">Supprimer</button>
     </form>
+
 
     <h1>Liste des livres</h1>
     <ul id="listeLivres">
