@@ -46,15 +46,21 @@ export default class Library extends ManageDom {
         const searchInput = document.getElementById('findBook');
         const search = searchInput.value;
         const datas = document.getElementById('datas');
+        let count = 0;
 
         this.books.forEach(element => {
             if (element.titre === search) {
+                count++;
                 const tr = this.createMarkup('tr', '', datas, [{id: 'infos'}]);
                 this.createMarkup('td', element.titre, tr);
                 this.createMarkup('td', element.auteur, tr);
                 this.createMarkup('td', element.annee, tr);
             }
         });
+
+        if (count === 0) {
+            alert('Aucun livre trouvé');
+        }
     }
 
     removeRows() {
