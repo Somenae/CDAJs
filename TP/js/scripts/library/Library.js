@@ -167,7 +167,6 @@ export default class Library extends ManageDom {
         const search = searchInput.value;
         const datas = document.getElementById('datas');
         const bookDatas = localStorage.getItem(search);
-        /* let count = 0; */
 
         if (bookDatas === null) {
             alert('Aucun livre trouvé');
