@@ -6,7 +6,7 @@ export default class DigitalBook extends Library {
         this.bookType = 'digital';
     }
 
-    addDigitalBook() {
-        
+    static addDigitalBook() {
+        console.log('pouet');
     }
 }

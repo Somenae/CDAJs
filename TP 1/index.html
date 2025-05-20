@@ -3,62 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Librairie</title>
+    <link rel="stylesheet" href="./css/style.css">
     <script type="module" src="./js/app.js"></script>
 </head>
 <body>
-    <h1>Ajout de livres</h1>
-    <form action="">
-        <label for="titre">Titre</label>
-        <input type="text" name="titre" id="titre">
-
-        <label for="annee">Année</label>
-        <input type="number" name="annee" id="annee">
-
-        <label for="auteur">Auteur</label>
-        <input type="text" name="auteur" id="auteur">
-
-        <label for="bookType">Type de livre</label>
-        <select name="bookType" id="bookType">
-            <option value="Papier">Papier</option>
-            <option value="Numérique">Numérique</option>
-        </select>
-
-        <button type="submit" id="ajouter">Ajouter</button>
-    </form>
-
-    <h1>Rechercher un livre</h1>
-    <form action="">
-        <label for="findBook">Rechercher par titre</label>
-        <input type="text" name="findBook" id="findBook">
+    <header>
+        <nav id="navBar">
+            <button type="button" id="librarian">Se connecter en libraire</button>
+            <button type="button" id="member">Se connecter en membre</button>
+            <button type="button" id="disconnect">Se déconnecter</button>
+        </nav>
+    </header>
+    <main>
+        <div id="title"></div>
+        <section id="addBooks" class="hidden">
+            <h2>Ajout de livres</h2>
+            <form id="addForm" action="">
+                <label for="titre">Titre</label>
+                <input type="text" name="titre" id="titre">
     
-        <button type="submit" id="rechercher">Rechercher</button>
-    </form>
+                <label for="annee">Année</label>
+                <input type="number" name="annee" id="annee">
     
-    <table>
-        <thead>
-            <tr>
-                <th>Titre</th>
-                <th>Auteur</th>
-                <th>Année</th>
-                <th>Type</th>
-            </tr>
-        </thead>
-        <tbody id="datas"></tbody>
-    </table>
-        
-    <h1>Suppression de livres</h1>
-    <form action="">
-        <label for="deletedBook">Supprimer par titre</label>
-        <input type="text" name="deletedBook" id="deletedBook">
+                <label for="auteur">Auteur</label>
+                <input type="text" name="auteur" id="auteur">
+    
+                <label for="bookType">Type de livre</label>
+                <select name="bookType" id="bookType">
+                    <option value="Papier">Papier</option>
+                    <option value="Numérique">Numérique</option>
+                </select>
+            </form>
+        </section>
 
-        <button type="submit" id="supprimer">Supprimer</button>
-    </form>
+        <section id="searchBook" class="hidden">
+            <h2>Rechercher un livre</h2>
+            <form action="">
+                <label for="findBook">Rechercher par titre</label>
+                <input type="text" name="findBook" id="findBook">
+            
+                <button type="submit" id="rechercher">Rechercher</button>
+            </form>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Année</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody id="datas"></tbody>
+            </table>
+        </section>
+
+        <section id="deleteBooks" class="hidden">
+            <h2>Suppression de livres</h2>
+            <form id="deleteForm" action="">
+                <label for="deletedBook">Supprimer par titre</label>
+                <input type="text" name="deletedBook" id="deletedBook">
+            </form>
+        </section>
 
 
-    <h1>Liste des livres</h1>
-    <ul id="listeLivres">
-        
-    </ul>
+        <h2>Liste des livres</h2>
+        <ul id="listeLivres">
+            
+        </ul>
+    </main>
+    
 </body>
 </html>
