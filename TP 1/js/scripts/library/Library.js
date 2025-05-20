@@ -5,7 +5,6 @@ import Member from "../users/Member.js";
 export default class Library extends ManageDom {
     constructor() {
         super();
-        /* this.books = []; */
         this.connectedUser;
         this.start();
     }
@@ -129,6 +128,11 @@ export default class Library extends ManageDom {
             profileButton.remove();
         }
 
+        const borrowButton = document.getElementById('borrow');
+        if (borrowButton) {
+            borrowButton.remove();
+        }
+
         this.connectedUser = undefined;
     }
 
@@ -174,25 +178,12 @@ export default class Library extends ManageDom {
             this.createMarkup('td', parsedBookDatas.auteur, tr);
             this.createMarkup('td', parsedBookDatas.annee, tr);
             this.createMarkup('td', parsedBookDatas.type, tr);
-            const tdButton = this.createMarkup('td', '', tr);
-            const borrowButton = this.createMarkup('button', 'Emprunter', tdButton, [{ type:'button' }]);
-            borrowButton.addEventListener("click", () => Member.borrowBook(localStorage.key(searchInput.value)));
-        }
-
-        /* this.books.forEach(element => {
-            if (element.titre === search) {
-                count++;
-                const tr = this.createMarkup('tr', '', datas, [{id: 'infos'}]);
-                this.createMarkup('td', element.titre, tr);
-                this.createMarkup('td', element.auteur, tr);
-                this.createMarkup('td', element.annee, tr);
-                this.createMarkup('td', element.type, tr);
+            if (this.connectedUser.getRole() === 'member') {
+                const tdButton = this.createMarkup('td', '', tr);
+                const borrowButton = this.createMarkup('button', 'Emprunter', tdButton, [{ type:'button', id:'borrow' }]);
+                borrowButton.addEventListener("click", () => Member.borrowBook(localStorage.key(searchInput.value)));
             }
-        }); */
-
-        /* if (count === 0) {
-            alert('Aucun livre trouvé');
-        } */
+        }
     }
 
     removeRows() {
@@ -213,12 +204,8 @@ export default class Library extends ManageDom {
         const liste = document.getElementById('listeLivres');
         for (let i = 0; i < localStorage.length; i++) {
             const li = this.createMarkup('li', `${localStorage.key(i)}`, liste);
-            /* const button = this.createMarkup('button', "Emprunter", li);
-            button.addEventListener("click", () => Member.borrowBook(localStorage.key(i))); */
+            
         }
-        /* this.books.forEach(element => {
-            const li = this.createMarkup('li', `${element.titre}`, liste);
-        }); */
     }
 
     detachBooks() {
@@ -240,18 +227,7 @@ export default class Library extends ManageDom {
         } else {
             alert('Ajoutez des livres pour pouvoir en supprimer');
         }
-
-        /* if (this.books.length > 0) {
-           for (let i = 0; i < this.books.length; i++) {
-                if (this.books[i].titre === deletedBook.value) {
-                    this.books.splice(i, i+1);
-                } else {
-                    alert('Le livre n\'existe pas');
-                }
-            } 
-        } else {
-            alert('Ajoutez des livres pour pouvoir en supprimer');
-        } */
+        
         this.displayBooks();
         this.removeRows();
     }
